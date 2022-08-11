@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let button of buttons) {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
-                alert("You Clicked Submit!");
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
@@ -35,6 +35,19 @@ function runGame(gameType) {
 }
 
 function checkAnswer() {
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let testAnswer = userAnswer === calculatedAnswer[0];
+
+    if (testAnswer) {
+        alert("You got it right!! :D");
+    } else {
+        alert(`Awwww...your answer was ${userAnswer}, but the correct answer was ${calculatedAnswer[0]}.`);
+    }
+
+    runGame(calculatedAnswer[1]);
+    let clearBox = parseInt(document.getElementById("answer-box"))
+    clearBox.value = "0"
 
 }
 
@@ -47,8 +60,8 @@ function calculateCorrectAnswer() {
     let operand2 = parseInt(document.getElementById("operand2").innerText);
     let operator = document.getElementById("operator").innerText;
 
-    if (operator = "+") {
-        return operand1 + operand2
+    if (operator === "+") {
+        return [operand1 + operand2, "addition"];
     } else {
         alert(`Unfineshed Operation: ${operator}`);
         throw `Unfineshed Operation: ${operator}. Aborting!`;
