@@ -44,6 +44,7 @@ function runGame(gameType) {
         displayMultiplyQuestion(num1, num2);
     } else if (gameType === "division") {
         displayDivideQuestion(num1, num2);
+        alert("The division game only accepts integers, so the number will be rounded up")
     } else {
         alert(`Unkwon Game Type: ${gameType}`);
         throw `Unkwon Game Type: ${gameType}. Aborting!`;
@@ -55,7 +56,7 @@ function runGame(gameType) {
  * the returned calculateCorrectAnswer array
  */
 function checkAnswer() {
-    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let userAnswer = document.getElementById("answer-box").value;
     let calculatedAnswer = calculateCorrectAnswer();
     let testAnswer = userAnswer === calculatedAnswer[0];
 
@@ -88,8 +89,8 @@ function calculateCorrectAnswer() {
         return [operand1 - operand2, "subtract"];
     } else if (operator === "x") {
         return [operand1 * operand2, "multiply"];
-    } else if (operator === "-") {
-        return [operand1 / operand2, "division"];
+    } else if (operator === "/") {
+        return [(operand1 / operand2).toFixed(0), "division"];
     } else {
         alert(`Unfineshed Operation: ${operator}`);
         throw `Unfineshed Operation: ${operator}. Aborting!`;
@@ -141,7 +142,7 @@ function displayMultiplyQuestion(operand1, operand2) {
 }
 
 function displayDivideQuestion(operand1, operand2) {
-    document.getElementById("operand1").textContent = operand1;
-    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById("operand2").textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById("operator").textContent = "/";
 }
