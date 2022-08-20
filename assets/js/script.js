@@ -112,6 +112,13 @@ function displayAdditionQuestion(operand1, operand2) {
 }
 
 function displaySubtractQuestion(operand1, operand2) {
+    /**
+     * I have decided to let the game show negative results
+     * But, if needed I could have run this code
+     * document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2 "If Operand 1 is greater than operand 2 return operand 1, else 2"
+     * document.getElementById("operand2").textContent = operand1 > operand2 ? operand2 : operand1 "If Operand 1 is greater than operand 2 return operand 2, else 1"
+     * this code will only give questions that doesn't have any negative answer. Like the result being -2, -3...which I don't think it is a problem.
+     */
     document.getElementById("operand1").textContent = operand1;
     document.getElementById("operand2").textContent = operand2;
     document.getElementById("operator").textContent = "-";
